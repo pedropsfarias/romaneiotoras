@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flutter: Pub get",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["pub", "get"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Run debug (Android)",
+      "dependsOn": ["Flutter: Pub get"],
+      "type": "shell",
+      "command": "flutter",
+      "args": ["run", "-d", "android"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": "$dart"
+    },
+    {
+      "label": "Flutter: Run debug (Web)",
+      "dependsOn": ["Flutter: Pub get"],
+      "type": "shell",
+      "command": "flutter",
+      "args": ["run", "-d", "chrome"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": "$dart"
+    },
+    {
+      "label": "Flutter: Build APK",
+      "dependsOn": ["Flutter: Pub get"],
+      "type": "shell",
+      "command": "flutter",
+      "args": ["build", "apk", "--debug"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": "$dart"
+    },
+    {
+      "label": "Flutter: Build AppBundle",
+      "dependsOn": ["Flutter: Pub get"],
+      "type": "shell",
+      "command": "flutter",
+      "args": ["build", "appbundle", "--release"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": "$dart"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flutter: Pub get",
+      "type": "shell",
+      "command": "flutter",
+      "args": ["pub", "get"],
+      "options": {
+        "cwd": "${workspaceFolder}/romaneio_flutter"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Run Android",
+      "dependsOn": ["Flutter: Pub get"],
+      "type": "shell",
+      "command": "flutter",
+      "args": ["run", "-d", "android"],
+      "options": {
+        "cwd": "${workspaceFolder}/romaneio_flutter"
+      },
+      "isBackground": true,
+      "problemMatcher": "$dart"
+    },
+    {
+      "label": "Flutter: Run Web",
+      "dependsOn": ["Flutter: Pub get"],
+      "type": "shell",
+      "command": "flutter",
+      "args": ["run", "-d", "chrome"],
+      "options": {
+        "cwd": "${workspaceFolder}/romaneio_flutter"
+      },
+      "isBackground": true,
+      "problemMatcher": "$dart"
+    },
+    {
+      "label": "Flutter: Build APK",
+      "dependsOn": ["Flutter: Pub get"],
+      "type": "shell",
+      "command": "flutter",
+      "args": ["build", "apk", "--debug"],
+      "options": {
+        "cwd": "${workspaceFolder}/romaneio_flutter"
+      },
+      "group": "build",
+      "problemMatcher": "$dart"
+    }
+  ]
+}

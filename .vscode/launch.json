@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter: Android Debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "${workspaceFolder}/romaneio_flutter/lib/main.dart",
+      "cwd": "${workspaceFolder}/romaneio_flutter",
+      "flutterMode": "debug"
+    },
+    {
+      "name": "Flutter: Web Debug",
+      "type": "dart",
+      "request": "launch",
+      "program": "${workspaceFolder}/romaneio_flutter/lib/main.dart",
+      "args": [
+        "-d",
+        "chrome"
+      ],
+      "cwd": "${workspaceFolder}/romaneio_flutter",
+      "flutterMode": "debug"
+    }
+  ]
+}
