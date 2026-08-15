@@ -32,12 +32,19 @@ class _RomaneioAppState extends State<RomaneioApp> {
     'Ana',
     'Pedro',
   ];
-  final List<String> compradores = const ['Comprador A', 'Comprador B', 'Novo comprador'];
+  final List<String> compradores = const [
+    'Comprador A',
+    'Comprador B',
+    'Novo comprador',
+  ];
   final List<String> empreiteiros = const ['Empreiteiro A', 'Empreiteiro B'];
   final List<String> proprietarios = const ['Proprietário A', 'Proprietário B'];
   final List<String> municipios = const ['Municipio A', 'Municipio B'];
   final List<String> localidades = const ['Localidade A', 'Localidade B'];
-  final List<String> carregadores = const ['Operador Munk A', 'Operador Munk B'];
+  final List<String> carregadores = const [
+    'Operador Munk A',
+    'Operador Munk B',
+  ];
   final List<String> medidores = const ['Medidor A', 'Medidor B'];
   final List<String> motoristas = const ['Motorista A', 'Motorista B'];
   final List<String> operadores = const ['Munk A', 'Munk B'];
@@ -132,7 +139,8 @@ class _RomaneioAppState extends State<RomaneioApp> {
       localidade: localidades.first,
       municipio: municipios.first,
       data: now.toIso8601String().substring(0, 10),
-      hora: '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}',
+      hora:
+          '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}',
       carregador: carregadores.first,
       medidor: medidores.first,
       motorista: motoristas.first,
@@ -160,7 +168,9 @@ class _RomaneioAppState extends State<RomaneioApp> {
   void _saveCurrentRomaneio() {
     if (currentRomaneio == null) return;
     setState(() {
-      final index = abertos.indexWhere((item) => item.id == currentRomaneio!.id);
+      final index = abertos.indexWhere(
+        (item) => item.id == currentRomaneio!.id,
+      );
       if (index >= 0) {
         abertos[index] = currentRomaneio!;
       }
@@ -171,7 +181,9 @@ class _RomaneioAppState extends State<RomaneioApp> {
   void _finalizeCurrentRomaneio() {
     if (currentRomaneio == null) return;
     setState(() {
-      final index = abertos.indexWhere((item) => item.id == currentRomaneio!.id);
+      final index = abertos.indexWhere(
+        (item) => item.id == currentRomaneio!.id,
+      );
       if (index >= 0) {
         abertos.removeAt(index);
       }
@@ -185,7 +197,9 @@ class _RomaneioAppState extends State<RomaneioApp> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const MaterialApp(home: Scaffold(body: Center(child: CircularProgressIndicator())));
+      return const MaterialApp(
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
+      );
     }
 
     return MaterialApp(
@@ -374,7 +388,12 @@ class LoginScreen extends StatelessWidget {
                         value: selectedRomaneador,
                         hint: const Text('Selecione o Romaneador'),
                         items: romaneadores
-                            .map((item) => DropdownMenuItem(value: item, child: Text(item)))
+                            .map(
+                              (item) => DropdownMenuItem(
+                                value: item,
+                                child: Text(item),
+                              ),
+                            )
                             .toList(),
                         onChanged: onChanged,
                       ),
@@ -391,7 +410,9 @@ class LoginScreen extends StatelessWidget {
                         backgroundColor: Colors.teal.shade800,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ),
@@ -442,7 +463,10 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Romaneador(a): $romaneador', style: const TextStyle(fontSize: 18)),
+                Text(
+                  'Romaneador(a): $romaneador',
+                  style: const TextStyle(fontSize: 18),
+                ),
                 const SizedBox(height: 28),
                 SizedBox(
                   width: double.infinity,
@@ -485,11 +509,11 @@ class HomeScreen extends StatelessWidget {
   }
 
   ButtonStyle _primaryButtonStyle() => ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF0B5D4C),
-        foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      );
+    backgroundColor: const Color(0xFF0B5D4C),
+    foregroundColor: Colors.white,
+    padding: const EdgeInsets.symmetric(vertical: 16),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  );
 }
 
 class DadosGeraisScreen extends StatefulWidget {
@@ -536,7 +560,9 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
   @override
   void initState() {
     super.initState();
-    observacoesController = TextEditingController(text: widget.romaneio.observacoes);
+    observacoesController = TextEditingController(
+      text: widget.romaneio.observacoes,
+    );
   }
 
   @override
@@ -564,15 +590,23 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
               value: romaneio.comprador,
               items: widget.compradores,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(comprador: value ?? romaneio.comprador));
+                widget.onChanged(
+                  romaneio.copyWith(comprador: value ?? romaneio.comprador),
+                );
               },
             ),
             _DropdownField<String>(
               label: 'Empreiteiro(s)',
-              value: romaneio.empreiteiros.isNotEmpty ? romaneio.empreiteiros.first : widget.empreiteiros.first,
+              value: romaneio.empreiteiros.isNotEmpty
+                  ? romaneio.empreiteiros.first
+                  : widget.empreiteiros.first,
               items: widget.empreiteiros,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(empreiteiros: value == null ? const [] : [value]));
+                widget.onChanged(
+                  romaneio.copyWith(
+                    empreiteiros: value == null ? const [] : [value],
+                  ),
+                );
               },
             ),
             _DropdownField<String>(
@@ -580,15 +614,23 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
               value: romaneio.proprietario,
               items: widget.proprietarios,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(proprietario: value ?? romaneio.proprietario));
+                widget.onChanged(
+                  romaneio.copyWith(
+                    proprietario: value ?? romaneio.proprietario,
+                  ),
+                );
               },
             ),
             _DropdownField<String>(
               label: 'Placa',
-              value: romaneio.placas.isNotEmpty ? romaneio.placas.first : widget.placas.first,
+              value: romaneio.placas.isNotEmpty
+                  ? romaneio.placas.first
+                  : widget.placas.first,
               items: widget.placas,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(placas: value == null ? const [] : [value]));
+                widget.onChanged(
+                  romaneio.copyWith(placas: value == null ? const [] : [value]),
+                );
               },
             ),
             _DropdownField<String>(
@@ -596,7 +638,9 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
               value: romaneio.localidade,
               items: widget.localidades,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(localidade: value ?? romaneio.localidade));
+                widget.onChanged(
+                  romaneio.copyWith(localidade: value ?? romaneio.localidade),
+                );
               },
             ),
             _DropdownField<String>(
@@ -604,7 +648,9 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
               value: romaneio.municipio,
               items: widget.municipios,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(municipio: value ?? romaneio.municipio));
+                widget.onChanged(
+                  romaneio.copyWith(municipio: value ?? romaneio.municipio),
+                );
               },
             ),
             const SizedBox(height: 8),
@@ -615,7 +661,9 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
               value: romaneio.carregador,
               items: widget.carregadores,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(carregador: value ?? romaneio.carregador));
+                widget.onChanged(
+                  romaneio.copyWith(carregador: value ?? romaneio.carregador),
+                );
               },
             ),
             _DropdownField<String>(
@@ -623,7 +671,9 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
               value: romaneio.medidor,
               items: widget.medidores,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(medidor: value ?? romaneio.medidor));
+                widget.onChanged(
+                  romaneio.copyWith(medidor: value ?? romaneio.medidor),
+                );
               },
             ),
             _DropdownField<String>(
@@ -631,7 +681,9 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
               value: romaneio.motorista,
               items: widget.motoristas,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(motorista: value ?? romaneio.motorista));
+                widget.onChanged(
+                  romaneio.copyWith(motorista: value ?? romaneio.motorista),
+                );
               },
             ),
             _DropdownField<String>(
@@ -639,7 +691,9 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
               value: romaneio.operador,
               items: widget.operadores,
               onChanged: (value) {
-                widget.onChanged(romaneio.copyWith(operador: value ?? romaneio.operador));
+                widget.onChanged(
+                  romaneio.copyWith(operador: value ?? romaneio.operador),
+                );
               },
             ),
             const SizedBox(height: 12),
@@ -657,11 +711,17 @@ class _DadosGeraisScreenState extends State<DadosGeraisScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(onPressed: widget.onBack, child: const Text('Voltar')),
+                TextButton(
+                  onPressed: widget.onBack,
+                  child: const Text('Voltar'),
+                ),
                 const SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: widget.onNext,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0B5D4C), foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0B5D4C),
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Avançar'),
                 ),
               ],
@@ -697,7 +757,11 @@ class _ComprimentoScreenState extends State<ComprimentoScreen> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: widget.romaneio.comprimento > 0 ? widget.romaneio.comprimento.toString() : '');
+    controller = TextEditingController(
+      text: widget.romaneio.comprimento > 0
+          ? widget.romaneio.comprimento.toString()
+          : '',
+    );
   }
 
   @override
@@ -723,7 +787,9 @@ class _ComprimentoScreenState extends State<ComprimentoScreen> {
             const SizedBox(height: 16),
             TextField(
               controller: controller,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               onChanged: (value) {
                 final parsed = double.tryParse(value.replaceAll(',', '.')) ?? 0;
                 widget.onChanged(widget.romaneio.copyWith(comprimento: parsed));
@@ -738,11 +804,17 @@ class _ComprimentoScreenState extends State<ComprimentoScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(onPressed: widget.onBack, child: const Text('Voltar')),
+                TextButton(
+                  onPressed: widget.onBack,
+                  child: const Text('Voltar'),
+                ),
                 const SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: widget.onNext,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0B5D4C), foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0B5D4C),
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Avançar'),
                 ),
               ],
@@ -806,12 +878,31 @@ class _DiametroScreenState extends State<DiametroScreen> {
           children: [
             Row(
               children: [
-                Expanded(child: Text('TORAS: ${summary['numToras']}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700))),
-                Expanded(child: Text('VOLUME: ${summary['volToras'].toStringAsFixed(3)} m³', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700))),
+                Expanded(
+                  child: Text(
+                    'TORAS: ${summary['numToras']}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    'VOLUME: ${summary['volToras'].toStringAsFixed(3)} m³',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 16),
-            const Text('Selecione o diâmetro sem a casca:', style: TextStyle(fontSize: 16)),
+            const Text(
+              'Selecione o diâmetro sem a casca:',
+              style: TextStyle(fontSize: 16),
+            ),
             const SizedBox(height: 12),
             GridView.count(
               shrinkWrap: true,
@@ -823,7 +914,10 @@ class _DiametroScreenState extends State<DiametroScreen> {
               children: List.generate(38, (index) {
                 final value = 15 + index;
                 return ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0B5D4C), foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0B5D4C),
+                    foregroundColor: Colors.white,
+                  ),
                   onPressed: () => _addTora(value),
                   child: Text(value.toString()),
                 );
@@ -838,7 +932,10 @@ class _DiametroScreenState extends State<DiametroScreen> {
                   child: TextField(
                     controller: customController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(hintText: 'Diâmetro', border: OutlineInputBorder()),
+                    decoration: const InputDecoration(
+                      hintText: 'Diâmetro',
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -852,35 +949,51 @@ class _DiametroScreenState extends State<DiametroScreen> {
                   },
                   icon: const Icon(Icons.add),
                   label: const Text('Add'),
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0B5D4C), foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0B5D4C),
+                    foregroundColor: Colors.white,
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 18),
             if (widget.romaneio.toras.isNotEmpty) ...[
-              const Text('Última tora inserida', style: TextStyle(fontWeight: FontWeight.w700)),
+              const Text(
+                'Última tora inserida',
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 8),
-              ...widget.romaneio.toras.take(5).map((tora) => ListTile(
-                    title: Text('Diâmetro ${tora.diametro}'),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete_outline),
-                      onPressed: () {
-                        final updated = widget.romaneio.removeTora(tora);
-                        widget.onChanged(updated);
-                        widget.onPersist();
-                      },
+              ...widget.romaneio.toras
+                  .take(5)
+                  .map(
+                    (tora) => ListTile(
+                      title: Text('Diâmetro ${tora.diametro}'),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.delete_outline),
+                        onPressed: () {
+                          final updated = widget.romaneio.removeTora(tora);
+                          widget.onChanged(updated);
+                          widget.onPersist();
+                        },
+                      ),
                     ),
-                  )),
+                  ),
             ],
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(onPressed: widget.onBack, child: const Text('Voltar')),
+                TextButton(
+                  onPressed: widget.onBack,
+                  child: const Text('Voltar'),
+                ),
                 const SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: widget.onNext,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0B5D4C), foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0B5D4C),
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Avançar'),
                 ),
               ],
@@ -929,14 +1042,19 @@ class QuantidadeScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 12),
                   child: ListTile(
                     title: Text('Diâmetro ${tora.diametro}'),
-                    subtitle: Text('Quantidade: ${tora.quantidade} · Volume: ${tora.volumeTotal.toStringAsFixed(3)} m³'),
+                    subtitle: Text(
+                      'Quantidade: ${tora.quantidade} · Volume: ${tora.volumeTotal.toStringAsFixed(3)} m³',
+                    ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle_outline),
                           onPressed: () {
-                            final updated = romaneio.updateQuantity(tora.diametro, tora.quantidade - 1);
+                            final updated = romaneio.updateQuantity(
+                              tora.diametro,
+                              tora.quantidade - 1,
+                            );
                             onChanged(updated);
                             onPersist();
                           },
@@ -944,7 +1062,10 @@ class QuantidadeScreen extends StatelessWidget {
                         IconButton(
                           icon: const Icon(Icons.add_circle_outline),
                           onPressed: () {
-                            final updated = romaneio.updateQuantity(tora.diametro, tora.quantidade + 1);
+                            final updated = romaneio.updateQuantity(
+                              tora.diametro,
+                              tora.quantidade + 1,
+                            );
                             onChanged(updated);
                             onPersist();
                           },
@@ -972,7 +1093,10 @@ class QuantidadeScreen extends StatelessWidget {
             const SizedBox(width: 12),
             ElevatedButton(
               onPressed: onNext,
-              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0B5D4C), foregroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF0B5D4C),
+                foregroundColor: Colors.white,
+              ),
               child: const Text('Avançar'),
             ),
           ],
@@ -1012,17 +1136,31 @@ class ResumoScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _InfoCard(label: 'TORAS', value: '${summary['numToras']}'),
-            _InfoCard(label: 'VOLUME', value: '${summary['volToras'].toStringAsFixed(3)} m³'),
-            _InfoCard(label: 'DIÂMETRO MÉDIO', value: '${romaneio.averageDiameter().toStringAsFixed(2)} cm'),
+            _InfoCard(
+              label: 'VOLUME',
+              value: '${summary['volToras'].toStringAsFixed(3)} m³',
+            ),
+            _InfoCard(
+              label: 'DIÂMETRO MÉDIO',
+              value: '${romaneio.averageDiameter().toStringAsFixed(2)} cm',
+            ),
             const SizedBox(height: 16),
-            const Text('Distribuição por faixa', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+            const Text(
+              'Distribuição por faixa',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
             const SizedBox(height: 8),
-            ...agrupado.entries.map((entry) => ListTile(
-                  title: Text(entry.key),
-                  trailing: Text('${entry.value.toStringAsFixed(3)} m³'),
-                )),
+            ...agrupado.entries.map(
+              (entry) => ListTile(
+                title: Text(entry.key),
+                trailing: Text('${entry.value.toStringAsFixed(3)} m³'),
+              ),
+            ),
             const SizedBox(height: 24),
-            Text('Valor estimado: R\$ ${total.toStringAsFixed(2)}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+            Text(
+              'Valor estimado: R\$ ${total.toStringAsFixed(2)}',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+            ),
             const SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -1031,7 +1169,10 @@ class ResumoScreen extends StatelessWidget {
                 const SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: onNext,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0B5D4C), foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0B5D4C),
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Avançar'),
                 ),
               ],
@@ -1068,7 +1209,9 @@ class _CompletoScreenState extends State<CompletoScreen> {
   @override
   void initState() {
     super.initState();
-    _observacoesController = TextEditingController(text: widget.romaneio.observacoes);
+    _observacoesController = TextEditingController(
+      text: widget.romaneio.observacoes,
+    );
     _fotos = List<String>.from(widget.romaneio.fotos);
   }
 
@@ -1085,10 +1228,12 @@ class _CompletoScreenState extends State<CompletoScreen> {
 
     setState(() {
       _fotos[index] = result.path;
-      widget.onChanged(widget.romaneio.copyWith(
-        observacoes: _observacoesController.text,
-        fotos: List<String>.from(_fotos),
-      ));
+      widget.onChanged(
+        widget.romaneio.copyWith(
+          observacoes: _observacoesController.text,
+          fotos: List<String>.from(_fotos),
+        ),
+      );
     });
   }
 
@@ -1102,10 +1247,7 @@ class _CompletoScreenState extends State<CompletoScreen> {
     if (!mounted) return;
 
     await SharePlus.instance.share(
-      ShareParams(
-        text: 'Romaneio exportado',
-        files: [XFile(file.path)],
-      ),
+      ShareParams(text: 'Romaneio exportado', files: [XFile(file.path)]),
     );
 
     if (!mounted) return;
@@ -1128,22 +1270,49 @@ class _CompletoScreenState extends State<CompletoScreen> {
         pageFormat: PdfPageFormat.a4,
         build: (context) {
           final body = <pw.Widget>[];
-          body.add(pw.Text('ROMANEIO DE TORAS', style: pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)));
+          body.add(
+            pw.Text(
+              'ROMANEIO DE TORAS',
+              style: pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold),
+            ),
+          );
           body.add(pw.SizedBox(height: 10));
           body.add(pw.Text('Romaneador: ${widget.romaneio.romaneador}'));
           body.add(pw.Text('Comprador: ${widget.romaneio.comprador}'));
-          body.add(pw.Text('Empreiteiro: ${widget.romaneio.empreiteiros.join(', ')}'));
+          body.add(
+            pw.Text('Empreiteiro: ${widget.romaneio.empreiteiros.join(', ')}'),
+          );
           body.add(pw.Text('Proprietário: ${widget.romaneio.proprietario}'));
-          body.add(pw.Text('Localidade: ${widget.romaneio.localidade} / ${widget.romaneio.municipio}'));
-          body.add(pw.Text('Data: ${widget.romaneio.data} • Hora: ${widget.romaneio.hora}'));
+          body.add(
+            pw.Text(
+              'Localidade: ${widget.romaneio.localidade} / ${widget.romaneio.municipio}',
+            ),
+          );
+          body.add(
+            pw.Text(
+              'Data: ${widget.romaneio.data} • Hora: ${widget.romaneio.hora}',
+            ),
+          );
           body.add(pw.SizedBox(height: 12));
           body.add(pw.Text('Quantidade total: ${summary['numToras']}'));
-          body.add(pw.Text('Volume total: ${summary['volToras'].toStringAsFixed(3)} m³'));
-          body.add(pw.Text('Preço estimado: R\$ ${widget.romaneio.totalPrice().toStringAsFixed(2)}'));
+          body.add(
+            pw.Text(
+              'Volume total: ${summary['volToras'].toStringAsFixed(3)} m³',
+            ),
+          );
+          body.add(
+            pw.Text(
+              'Preço estimado: R\$ ${widget.romaneio.totalPrice().toStringAsFixed(2)}',
+            ),
+          );
           body.add(pw.SizedBox(height: 12));
           body.add(pw.Text('Toras:'));
           for (final tora in widget.romaneio.toras) {
-            body.add(pw.Text('• Diâmetro ${tora.diametro} | Quantidade ${tora.quantidade} | Volume ${tora.volumeTotal.toStringAsFixed(3)} m³'));
+            body.add(
+              pw.Text(
+                '• Diâmetro ${tora.diametro} | Quantidade ${tora.quantidade} | Volume ${tora.volumeTotal.toStringAsFixed(3)} m³',
+              ),
+            );
           }
           body.add(pw.SizedBox(height: 12));
           body.add(pw.Text('Observações: ${widget.romaneio.observacoes}'));
@@ -1157,7 +1326,10 @@ class _CompletoScreenState extends State<CompletoScreen> {
             body.add(pw.Image(image));
           }
 
-          return pw.Column(children: body, crossAxisAlignment: pw.CrossAxisAlignment.start);
+          return pw.Column(
+            children: body,
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+          );
         },
       ),
     );
@@ -1180,33 +1352,54 @@ class _CompletoScreenState extends State<CompletoScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Romaneador: ${widget.romaneio.romaneador}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+            Text(
+              'Romaneador: ${widget.romaneio.romaneador}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
             const SizedBox(height: 8),
             Text('Comprador: ${widget.romaneio.comprador}'),
             Text('Empreiteiro: ${widget.romaneio.empreiteiros.join(', ')}'),
             Text('Proprietário: ${widget.romaneio.proprietario}'),
-            Text('Localidade: ${widget.romaneio.localidade} / ${widget.romaneio.municipio}'),
-            Text('Data: ${widget.romaneio.data} · Hora: ${widget.romaneio.hora}'),
+            Text(
+              'Localidade: ${widget.romaneio.localidade} / ${widget.romaneio.municipio}',
+            ),
+            Text(
+              'Data: ${widget.romaneio.data} · Hora: ${widget.romaneio.hora}',
+            ),
             const SizedBox(height: 14),
             Text('Quantidade total: ${summary['numToras']}'),
             Text('Volume total: ${summary['volToras'].toStringAsFixed(3)} m³'),
-            Text('Preço estimado: R\$ ${widget.romaneio.totalPrice().toStringAsFixed(2)}'),
+            Text(
+              'Preço estimado: R\$ ${widget.romaneio.totalPrice().toStringAsFixed(2)}',
+            ),
             const SizedBox(height: 18),
-            const Text('Observações', style: TextStyle(fontWeight: FontWeight.w700)),
+            const Text(
+              'Observações',
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
             TextField(
               controller: _observacoesController,
               onChanged: (value) {
-                widget.onChanged(widget.romaneio.copyWith(observacoes: value, fotos: List<String>.from(_fotos)));
+                widget.onChanged(
+                  widget.romaneio.copyWith(
+                    observacoes: value,
+                    fotos: List<String>.from(_fotos),
+                  ),
+                );
               },
               maxLines: 4,
               decoration: const InputDecoration(border: OutlineInputBorder()),
             ),
             const SizedBox(height: 18),
-            const Text('Fotos do romaneio', style: TextStyle(fontWeight: FontWeight.w700)),
+            const Text(
+              'Fotos do romaneio',
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
             const SizedBox(height: 12),
             Row(
               children: List.generate(3, (index) {
-                final exists = index < _fotos.length && _fotos[index].isNotEmpty;
+                final exists =
+                    index < _fotos.length && _fotos[index].isNotEmpty;
                 return Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
@@ -1227,7 +1420,12 @@ class _CompletoScreenState extends State<CompletoScreen> {
                                   fit: BoxFit.cover,
                                 ),
                               )
-                            : const Center(child: Icon(Icons.camera_alt_outlined, size: 32)),
+                            : const Center(
+                                child: Icon(
+                                  Icons.camera_alt_outlined,
+                                  size: 32,
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -1258,11 +1456,17 @@ class _CompletoScreenState extends State<CompletoScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(onPressed: widget.onBack, child: const Text('Voltar')),
+                TextButton(
+                  onPressed: widget.onBack,
+                  child: const Text('Voltar'),
+                ),
                 const SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: widget.onFinalize,
-                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF0B5D4C), foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF0B5D4C),
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text('Finalizar'),
                 ),
               ],
@@ -1316,7 +1520,9 @@ class _DropdownField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? selected = items.contains(value.toString()) ? value.toString() : items.first;
+    String? selected = items.contains(value.toString())
+        ? value.toString()
+        : items.first;
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: DropdownButtonFormField<String>(
@@ -1325,7 +1531,9 @@ class _DropdownField<T> extends StatelessWidget {
           labelText: label,
           border: const OutlineInputBorder(),
         ),
-        items: items.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
+        items: items
+            .map((item) => DropdownMenuItem(value: item, child: Text(item)))
+            .toList(),
         onChanged: onChanged,
       ),
     );
@@ -1374,10 +1582,10 @@ class Tora {
   }
 
   Map<String, dynamic> toJson() => {
-        'diametro': diametro,
-        'quantidade': quantidade,
-        'volumeTotal': volumeTotal,
-      };
+    'diametro': diametro,
+    'quantidade': quantidade,
+    'volumeTotal': volumeTotal,
+  };
 
   factory Tora.fromJson(Map<String, dynamic> json) {
     return Tora(
@@ -1486,24 +1694,29 @@ class Romaneio {
 
     if (index >= 0) {
       final atual = novaLista[index];
-      final novoVolume = _volumeUnitario(diametro) * (atual.quantidade + quantidade);
+      final novoVolume =
+          _volumeUnitario(diametro) * (atual.quantidade + quantidade);
       novaLista[index] = atual.copyWith(
         quantidade: atual.quantidade + quantidade,
         volumeTotal: novoVolume,
       );
     } else {
-      novaLista.add(Tora(
-        diametro: diametro,
-        quantidade: quantidade,
-        volumeTotal: _volumeUnitario(diametro) * quantidade,
-      ));
+      novaLista.add(
+        Tora(
+          diametro: diametro,
+          quantidade: quantidade,
+          volumeTotal: _volumeUnitario(diametro) * quantidade,
+        ),
+      );
     }
 
     return copyWith(toras: novaLista);
   }
 
   Romaneio removeTora(Tora tora) {
-    final novaLista = toras.where((item) => item.diametro != tora.diametro).toList();
+    final novaLista = toras
+        .where((item) => item.diametro != tora.diametro)
+        .toList();
     return copyWith(toras: novaLista);
   }
 
@@ -1530,7 +1743,9 @@ class Romaneio {
     double volTotal = 0;
 
     for (final tora in toras) {
-      final volume = tora.volumeTotal > 0 ? tora.volumeTotal : _volumeUnitario(tora.diametro) * tora.quantidade;
+      final volume = tora.volumeTotal > 0
+          ? tora.volumeTotal
+          : _volumeUnitario(tora.diametro) * tora.quantidade;
       numToras += tora.quantidade;
       volTotal += volume;
     }
@@ -1548,7 +1763,9 @@ class Romaneio {
     };
 
     for (final tora in toras) {
-      final volume = tora.volumeTotal > 0 ? tora.volumeTotal : _volumeUnitario(tora.diametro) * tora.quantidade;
+      final volume = tora.volumeTotal > 0
+          ? tora.volumeTotal
+          : _volumeUnitario(tora.diametro) * tora.quantidade;
       if (tora.diametro <= 24) {
         result['<= 24'] = (result['<= 24'] ?? 0) + volume;
       } else if (tora.diametro <= 29) {
@@ -1568,7 +1785,10 @@ class Romaneio {
   double averageDiameter() {
     if (toras.isEmpty) return 0;
     final totalQuant = toras.fold<int>(0, (sum, item) => sum + item.quantidade);
-    final totalDiam = toras.fold<double>(0, (sum, item) => sum + (item.diametro * item.quantidade));
+    final totalDiam = toras.fold<double>(
+      0,
+      (sum, item) => sum + (item.diametro * item.quantidade),
+    );
     return totalQuant == 0 ? 0 : totalDiam / totalQuant;
   }
 
@@ -1579,26 +1799,26 @@ class Romaneio {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'romaneador': romaneador,
-        'comprador': comprador,
-        'empreiteiros': empreiteiros,
-        'proprietario': proprietario,
-        'placas': placas,
-        'localidade': localidade,
-        'municipio': municipio,
-        'data': data,
-        'hora': hora,
-        'carregador': carregador,
-        'medidor': medidor,
-        'motorista': motorista,
-        'operador': operador,
-        'observacoes': observacoes,
-        'comprimento': comprimento,
-        'toras': toras.map((item) => item.toJson()).toList(),
-        'fotos': fotos,
-        'romaneioAberto': romaneioAberto,
-      };
+    'id': id,
+    'romaneador': romaneador,
+    'comprador': comprador,
+    'empreiteiros': empreiteiros,
+    'proprietario': proprietario,
+    'placas': placas,
+    'localidade': localidade,
+    'municipio': municipio,
+    'data': data,
+    'hora': hora,
+    'carregador': carregador,
+    'medidor': medidor,
+    'motorista': motorista,
+    'operador': operador,
+    'observacoes': observacoes,
+    'comprimento': comprimento,
+    'toras': toras.map((item) => item.toJson()).toList(),
+    'fotos': fotos,
+    'romaneioAberto': romaneioAberto,
+  };
 
   factory Romaneio.fromJson(Map<String, dynamic> json) {
     return Romaneio(
