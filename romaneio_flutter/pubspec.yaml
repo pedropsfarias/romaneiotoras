@@ -38,10 +38,14 @@ dependencies:
   pdf: ^3.10.8
   printing: ^5.13.0
   share_plus: ^11.0.0
+  excel: ^4.0.6
+  file_picker: ^10.3.3
+  archive: ^3.6.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.3
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -60,6 +64,24 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/templates/romaneio_template.xlsx
+    - assets/fonts/arial.ttf
+    - assets/images/logo_florestal_mierzva.png
+    - assets/images/logo_florestal_mierzva_transparente.png
+    - assets/images/floresta_rodape.png
+    - assets/images/floresta_rodape_transparente.png
+    - assets/images/wooden_log.png
+    - assets/images/front_log.png
+    - assets/images/app_icon.png
+    - assets/images/app_icon_foreground.png
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path: "assets/images/app_icon.png"
+  adaptive_icon_foreground: "assets/images/app_icon_foreground.png"
+  adaptive_icon_background: "#005A4B"
 
   # To add assets to your application, add an assets section, like this:
   # assets:
