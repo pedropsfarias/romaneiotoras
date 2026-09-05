@@ -1,1 +1,11 @@
-tmp/
+tmp
+/# Android Studio / IntelliJ
+.idea/
+*.iml
+
+# Flutter, Dart e Gradle
+**/.dart_tool/
+**/.gradle/
+**/build/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
