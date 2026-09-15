@@ -1,0 +1,4 @@
+storePassword=SENHA_DA_CHAVE
+keyPassword=SENHA_DA_CHAVE
+keyAlias=upload
+storeFile=C:\\Users\\SEU_USUARIO\\upload-keystore.jks

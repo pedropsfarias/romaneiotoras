@@ -1,4 +1,4 @@
-package br.com.neo.romaneio_flutter
+package br.com.mierzva.romaneiotoras
 
 import android.content.ContentValues
 import android.content.Intent
